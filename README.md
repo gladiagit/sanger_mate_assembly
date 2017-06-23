@@ -4,10 +4,24 @@
 This assembly pipeline uses several existing tools for calling ((phrap/phred),  cleaning (Lucy/Seqclean) and assembling (CAP3) of long EST reads with mate pair information. The reason for this pipeline is that, in the case of the sandfly Phlebotomus papatasi, usig cap3 in a two step assembly, where the first step deals only with mate-pairs resulted in an improved assembly.
 
 ## Dependencies:
-Phrap/Phred <br>
-Lucy <br>
-SeqClean <br>
-CAP3 <br>
+<a href="http://www.phrap.org/phredphrapconsed.html">Phrap/Phred </a><br>
+<a href="http://www.complex.iastate.edu/download/Lucy2/index.html">Lucy</a><br>
+<a href="ftp://occams.dfci.harvard.edu/pub/bio/tgi/software/seqclean/">SeqClean </a><br>
+<a href="http://seq.cs.iastate.edu/">CAP3</a><br>
 Bioperl <br>
+Perl 5 <br>
 
-### 
+### Runining instructions:
+Each script can be run individually. 
+1. cleaning_pipeline.pl
+2. cap_mate_assembly2.pl
+3. ace_parser.pl
+4. add_sense2.pl
+5. cap3_files_assembly.pl
+
+### Script description:
+1. cleaning_pipeline
+The script basically takes in the Lucy and SeqClean parameters and calls on the two external programs for cleaning and trimining of the initial raw sequences, ensuring that the polyA tails are clipped, vector and addapter sequences have been removed as well as regions with low quality score regions from th ends of the reads. 
+```
+perl cleaning_pipeline.pl input_fastafile input_quality_file vectorfile splicefile contaminantfile{untrimed vector/linker/adapter} temporary_folder path_to_lucy path_to_seqclean vectordb [lucy/seqclean params : -lucy:lucy_param:value / -sqcln:sqcln_param:value]
+```
