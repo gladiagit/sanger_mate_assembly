@@ -362,7 +362,6 @@ sub main
    foreach my $id (keys %seqs)
    {
       my $com = &add_slash($cap3p)."cap3 ".$seqs{$id}{'sfile'}." ".$options;
-#      print "\n".$com."\n";
       `$com`;
       my ($ncont,$nreads,$href)=&ace_parser($seqs{$id}{'afile'});
       if ( ($ncont>0) && ($ncont<2))

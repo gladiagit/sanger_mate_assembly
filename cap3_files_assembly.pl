@@ -47,11 +47,11 @@ sub main
    my $cpath=$_[1];                  chomp($cpath);
    my $arr_ref=$_[2];                 chomp($arr_ref);
    my @cap3=@{$arr_ref};
-   my $com='ls '.$tname."*";
+   my $com='ls -f '.$tname."*";
    my @files=`$com`;                 chomp(@files);
    my $options;
    
-#   print "first file : ".$files[0]."\n";
+   print "first file : ".$files[0]."\n";
 #   my @temp=split/$tname|\.txt|\.fasta|\.fas|\.fa/, $files[0];
 #   print "insertion name : ".$temp[1]."\n";
    foreach my $opt (@cap3)
