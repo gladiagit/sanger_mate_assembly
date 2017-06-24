@@ -14,9 +14,11 @@ Perl 5 <br>
 ### Runining instructions:
 Each script can be run individually. 
 1. cleaning_pipeline.pl
-2. cap_mate_assembly2.pl
-3. cap3_files_assembly.pl
-4. ace_parser.pl
+2. lucy_trim.pl
+3. cap_mate_assembly2.pl
+4. cap3_files_assembly.pl
+5. ace_parser.pl
+6. blast_parser_complete.pl
 
 ### Script description:
 1. cleaning_pipeline.pl<br>
@@ -24,17 +26,35 @@ The script basically takes in the Lucy and SeqClean parameters and calls on the 
 ```
 perl cleaning_pipeline.pl input_fastafile input_quality_file vectorfile splicefile contaminantfile{untrimed vector/linker/adapter} temporary_folder path_to_lucy path_to_seqclean vectordb [lucy/seqclean params : -lucy:lucy_param:value / -sqcln:sqcln_param:value]
 ```
-2. cap_mate_assembly2.pl<br>
+2. lucy_trim.pl<br>
+The Lucy program identifies regions of low quality but does not trim both the quality files. This script takes in the results from Lucy and trims quality files to match the FASTA files prior to the first step of assembly. 
+```
+perl lucy_trim.pl fastafile  quailty_file out_filename_template
+```
+3. cap_mate_assembly2.pl<br>
 The script handles the first step of the EST assembly, where the mated pairs are assbled with more loose parameters. The resulting files are also the resulting FASTA and QUAL files by separating and re-naming the resutling contigs (assembled ESTs) and singlets (un-assembled reads). 
 ```
 perl cap3_mate_assembly2.pl input_fasta_file input_qual_file path_to_cap3 temporary_files_path output_filename_templat [cap3_specific_parameters]
 ```
-3. cap3_files_assembly2.pl<br>
-This script 
+4. cap3_files_assembly2.pl<br>
+This script performs the last step of the assembly and assembles all the reads together regardless of their mate pair information. This assembly step is usually more stringent than the first.
+```
+perl cap3_files_assembly.pl template_name path_to_cap3 cap3_options
+```
 
-4. ace_parser.pl<br>
+5. ace_parser.pl<br>
 The script returns the number of contigs and singlets generated  during the assmebly processs. 
 ```
 perl ace_parser.pl input_ace_file
 ```
-
+6. blast_paerser_complete.pl<br>
+This script is not directly part of the assembly pipeline but can be used for identifying the assembled sequences by parsing the results file from a BLAST job against NCBI's NR database. The command example bellow exemplies a couple of the parsing options of the script that can be used for automated identification of the sequences.
+```
+perl blast_parser_complete.pl blast_result_file\n
+                              [-bhit_species_dist:[eval]:outputfile:[species]]
+                              [-nhits:kword:e-val]
+                              [-bhit_pident:outputfile]
+```
+-bhit_species_dist: - top hit for a specific species<br>
+-nhits:kword:eval - top hits containing keyword in annotation and have a e-value better than eval <br>
+-bhit_pident - best hit's percent identity to the sequence <br>
