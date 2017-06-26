@@ -1,7 +1,7 @@
 # Sanger sequencing mate-pair based assembly pipeline
  A set of programs for mate-based assembly for Sanger type sequences. 
 ## Summary
-This assembly pipeline uses several existing tools for calling ((phrap/phred),  cleaning (Lucy/Seqclean) and assembling (CAP3) of long EST reads with mate pair information. The reason for this pipeline is that, in the case of the sandfly Phlebotomus papatasi, usig CAP3 in a two step assembly, where the first step deals only with mate-pairs resulted in an improved assembly.
+This assembly pipeline uses several existing tools for calling ((phrap/phred),  cleaning (Lucy/Seqclean) and assembling (CAP3) of long EST reads with mate pair information. The reason for this pipeline is that, in the case of the sandfly Phlebotomus papatasi, using CAP3 in a two-step assembly, where the first step deals only with mate-pairs resulted in an improved assembly.
 
 ## Dependencies:
 <a href="http://www.phrap.org/phredphrapconsed.html">Phrap/Phred </a><br>
@@ -11,7 +11,7 @@ This assembly pipeline uses several existing tools for calling ((phrap/phred),  
 Bioperl <br>
 Perl 5 <br>
 
-### Runining instructions:
+### Running instructions:
 Each script can be run individually. 
 1. cleaning_pipeline.pl
 2. lucy_trim.pl
@@ -22,7 +22,7 @@ Each script can be run individually.
 
 ### Script description:
 1. cleaning_pipeline.pl<br>
-The script basically takes in the Lucy and SeqClean parameters and calls on the two external programs for cleaning and trimining of the initial raw sequences, ensuring that the polyA tails are clipped, vector and addapter sequences have been removed as well as regions with low quality score regions from th ends of the reads. 
+The script basically takes in the Lucy and SeqClean parameters and calls on the two external programs for cleaning and trimming of the initial raw sequences, ensuring that the polyA tails are clipped, vector and adapter sequences have been removed as well as regions with low quality score regions from the ends of the reads. 
 ```
 perl cleaning_pipeline.pl input_fastafile input_quality_file vectorfile splicefile contaminantfile{untrimed vector/linker/adapter} temporary_folder path_to_lucy path_to_seqclean vectordb [lucy/seqclean params : -lucy:lucy_param:value / -sqcln:sqcln_param:value]
 ```
@@ -32,7 +32,7 @@ The Lucy program identifies regions of low quality but does not trim both the qu
 perl lucy_trim.pl fastafile  quailty_file out_filename_template
 ```
 3. cap_mate_assembly2.pl<br>
-The script handles the first step of the EST assembly, where the mated pairs are assbled with more loose parameters. The resulting files are also the resulting FASTA and QUAL files by separating and re-naming the resutling contigs (assembled ESTs) and singlets (un-assembled reads). 
+The script handles the first step of the EST assembly, where the mated pairs are assembled with more loose parameters. The resulting files are also the resulting FASTA and QUAL files by separating and re-naming the resulting contigs (assembled ESTs) and singlets (un-assembled reads). 
 ```
 perl cap3_mate_assembly2.pl input_fasta_file input_qual_file path_to_cap3 temporary_files_path output_filename_templat [cap3_specific_parameters]
 ```
@@ -43,12 +43,12 @@ perl cap3_files_assembly.pl template_name path_to_cap3 cap3_options
 ```
 
 5. ace_parser.pl<br>
-The script returns the number of contigs and singlets generated  during the assmebly processs. 
+The script returns the number of contigs and singlets generated during the assembly process. 
 ```
 perl ace_parser.pl input_ace_file
 ```
 6. blast_paerser_complete.pl<br>
-This script is not directly part of the assembly pipeline but can be used for identifying the assembled sequences by parsing the results file from a BLAST job against NCBI's NR database. The command example bellow exemplies a couple of the parsing options of the script that can be used for automated identification of the sequences.
+This script is not directly part of the assembly pipeline but can be used for identifying the assembled sequences by parsing the results file from a BLAST job against NCBI's NR database. The command example bellow exemplifies a couple of the parsing options of the script that can be used for automated identification of the sequences.
 ```
 perl blast_parser_complete.pl blast_result_file\n
                               [-bhit_species_dist:[eval]:outputfile:[species]]
