@@ -58,3 +58,6 @@ perl blast_parser_complete.pl blast_result_file\n
 -bhit_species_dist: - top hit for a specific species<br>
 -nhits:kword:eval - top hits containing keyword in annotation and have a e-value better than eval <br>
 -bhit_pident - best hit's percent identity to the sequence <br>
+## Reference
+
+Abrudan, J., Ramalho‐Ortigão, M., O'Neil, S., Stayback, G., Wadsworth, M., Bernard, M., Shoue, D., Emrich, S., Lawyer, P., Kamhawi, S., Rowton, E.D., Lehane, M.J., Bates, P.A., Valenzeula, J.G., Tomlinson, C., Appelbaum, E., Moeller, D., Thiesing, B., Dillon, R., Clifton, S., Lobo, N.F., Wilson, R.K., Collins, F.H. and McDowell, M.A. (2013), Phlebotomus papatasi transcriptome. Insect Mol Biol, 22: 211-232. https://doi.org/10.1111/imb.12015
